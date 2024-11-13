@@ -15,8 +15,8 @@ val colors = lightColorScheme(
 )
 
 val typography = Typography(
-    TextStyle(
-        fontSize = 24.sp
+     TextStyle(
+        fontSize = 16.sp
     )
 )
 

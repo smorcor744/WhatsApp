@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
@@ -23,10 +24,13 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.ui.unit.sp
 import com.example.whatsapp.ui.theme.WhatsAppGreen
 import com.example.whatsapp.ui.theme.WhatsAppDarkGray
 import com.example.whatsapp.ui.theme.WhatsAppBackgroundGray
 import com.example.whatsapp.ui.theme.WhatsAppTheme
+import kotlin.random.Random
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,12 +53,28 @@ fun Greeting(modifier: Modifier = Modifier) {
     val appName = stringResource(id = R.string.app_name)
 
     val names = mutableListOf(
-        stringResource(id = R.string.first_name),
-        stringResource(id = R.string.second_name),
-        stringResource(id = R.string.tercero_name),
-        stringResource(id = R.string.cuarto_name),
-        stringResource(id = R.string.quinto_name)
+        stringResource(id = R.string.first_name_1),
+        stringResource(id = R.string.second_name_1),
+        stringResource(id = R.string.tercero_name_1),
+        stringResource(id = R.string.cuarto_name_1),
+        stringResource(id = R.string.quinto_name_1),
+        stringResource(id = R.string.first_name_2),
+        stringResource(id = R.string.second_name_2),
+        stringResource(id = R.string.tercero_name_2),
+        stringResource(id = R.string.cuarto_name_2),
+        stringResource(id = R.string.quinto_name_2),
+        stringResource(id = R.string.first_name_3),
+        stringResource(id = R.string.second_name_3),
+        stringResource(id = R.string.tercero_name_3),
+        stringResource(id = R.string.cuarto_name_3),
+        stringResource(id = R.string.quinto_name_3),
+        stringResource(id = R.string.first_name_4),
+        stringResource(id = R.string.second_name_4),
+        stringResource(id = R.string.tercero_name_4),
+        stringResource(id = R.string.cuarto_name_4),
+        stringResource(id = R.string.quinto_name_4)
     )
+
 
     Column(
         modifier = modifier,
@@ -65,31 +85,41 @@ fun Greeting(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .background(WhatsAppDarkGray)
                 .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+
         ) {
             Text(
                 text = appName,
                 color = WhatsAppGreen,
                 modifier = Modifier.weight(1f),
+                fontSize = 25.sp
             )
 
-            Icon(
-                imageVector = Icons.Default.Call,
-                contentDescription = "Call Icon",
-                modifier = Modifier.size(24.dp),
-                tint = WhatsAppGreen
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             )
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = "Search Icon",
-                modifier = Modifier.size(24.dp),
-                tint = WhatsAppGreen
-            )
-            Icon(
-                imageVector = Icons.Default.MoreVert,
-                contentDescription = "MoreVert Icon",
-                modifier = Modifier.size(24.dp),
-                tint = WhatsAppGreen
-            )
+            {
+
+                Icon(
+                    imageVector = Icons.Default.Call,
+                    contentDescription = "Call Icon",
+                    modifier = Modifier.size(25.dp),
+                    tint = WhatsAppGreen
+                )
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Search Icon",
+                    modifier = Modifier.size(25.dp),
+                    tint = WhatsAppGreen
+                )
+                Icon(
+                    imageVector = Icons.Default.MoreVert,
+                    contentDescription = "MoreVert Icon",
+                    modifier = Modifier.size(25.dp),
+                    tint = WhatsAppGreen
+                )
+            }
         }
 
         LazyColumn(modifier = Modifier
@@ -102,16 +132,27 @@ fun Greeting(modifier: Modifier = Modifier) {
     }
 }
 
+fun hora(): String {
+    var hora1 = Random.nextInt(0,24)
+    var hora2 = Random.nextInt(0,60)
+    if (hora1 < 10 && hora2 < 10) {return "0$hora1:0$hora2"}
+    if (hora1 < 10 && hora2 >= 10) {return "0$hora1:$hora2"}
+    if (hora1 > 10 && hora2 < 10) {return "$hora1:0$hora2"}
+    else return "$hora1:$hora2"
+
+}
+
 @Composable
 fun Contacto(name: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
-            .background(Color.White)
-            .padding(8.dp),
+            .height(75.dp)
+            .padding(top = 2.dp)
+            .background(Color.White),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        Spacer(modifier = Modifier.width(16.dp))
         Icon(
             imageVector = Icons.Default.AccountCircle,
             contentDescription = "Contact icon",
@@ -121,8 +162,18 @@ fun Contacto(name: String) {
         Spacer(modifier = Modifier.width(16.dp))
         Text(
             text = name,
-            color = Color.Black
+            color = Color.Black,
+            fontSize = 18.sp
+
         )
+        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            text = hora(),
+            color = Color.Black,
+            fontSize = 14.sp,
+
+        )
+        Spacer(modifier = Modifier.width(16.dp))
     }
 }
 
